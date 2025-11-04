@@ -1,6 +1,78 @@
-# 🎨 Catpainting - Fine Art & NFT Gallery
+# Catherine Gonnord Art Platform
 
-A comprehensive web platform for selling Catherine Gonnord's aquarelle paintings, featuring both physical artwork sales and NFT minting capabilities with a complete admin back office.
+Une plateforme moderne et élégante pour présenter les œuvres aquarelles de Catherine Gonnord, artiste diplômée en architecture d'intérieur.
+
+## 🎨 Caractéristiques
+
+- **Design moderne et international** : Interface épurée avec une palette de couleurs inspirée du logo de l'artiste
+- **Galerie interactive** : Présentation des œuvres avec système de filtres et de recherche
+- **Responsive Design** : Optimisé pour tous les appareils
+- **Performance optimisée** : Built avec Next.js 15 et Turbopack
+
+## 🌿 Palette de couleurs
+
+La plateforme utilise une palette verte inspirée du logo de Catherine Gonnord :
+- Sage Deep (#2d5730)
+- Sage Medium (#4a7c59) 
+- Sage Soft (#7ba05b)
+- Sage Light (#a8c686)
+
+## 🚀 Technologies
+
+- **Next.js 15** avec App Router et Turbopack
+- **TypeScript** pour la sécurité des types
+- **Tailwind CSS** pour le styling
+- **React** pour l'interface utilisateur
+
+## 📁 Structure du projet
+
+```
+catpainting/
+├── app/                    # Pages Next.js App Router
+│   ├── page.tsx           # Landing page moderne
+│   ├── gallery/           # Galerie des œuvres
+│   ├── about/             # À propos de l'artiste
+│   └── contact/           # Contact et commissions
+├── src/
+│   ├── components/        # Composants React
+│   ├── data/             # Données des œuvres
+│   └── lib/              # Utilitaires
+└── public/
+    ├── artworks/         # Images des œuvres (32 aquarelles)
+    └── favicon.svg       # Système de favicons SVG
+```
+
+## 🎯 Pages principales
+
+- **Landing Page** : Section unique moderne pour artistes internationaux
+- **Galerie** : Collection complète avec 32 œuvres
+- **À propos** : Histoire et philosophie artistique
+- **Contact** : Formulaire pour commissions personnalisées
+
+## 🖼️ Collection
+
+La plateforme présente 32 aquarelles authentiques de Catherine Gonnord, couvrant :
+- Paysages et voyages
+- Intérieurs et architecture
+- Abstractions contemporaines
+- Études de mode et portraits
+
+## 🚀 Démarrage
+
+```bash
+npm install
+npm run dev
+```
+
+Ouvrir [http://localhost:3000](http://localhost:3000) pour voir l'application.
+
+## 💼 Contact
+
+Pour des commissions personnalisées ou des questions sur les œuvres, utilisez le formulaire de contact intégré.
+
+---
+
+*Plateforme développée avec passion pour mettre en valeur l'art de Catherine Gonnord*
 
 ## ✨ Features
 
