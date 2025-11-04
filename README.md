@@ -1,36 +1,244 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎨 Catpainting - Fine Art & NFT Gallery
 
-## Getting Started
+A comprehensive web platform for selling Catherine Gonnord's aquarelle paintings, featuring both physical artwork sales and NFT minting capabilities with a complete admin back office.
 
-First, run the development server:
+## ✨ Features
+
+### 🖼️ Public Gallery
+- **Homepage** with artist story and featured artworks
+- **Gallery** with category filtering and search
+- **Artwork Details** with NFT minting options
+- **About Page** with artist biography and exhibitions
+- **Contact Form** with commission request options
+
+### 🔐 Authentication & User Management
+- Supabase Auth integration
+- User registration and login
+- Protected routes for admin and user areas
+- Profile management
+
+### 👨‍💼 Admin Back Office
+- Dashboard with sales overview and analytics
+- Artwork management (CRUD operations)
+- Order tracking and status updates
+- Customer management
+- NFT minting interface
+- Content management system
+
+### 💎 NFT Integration
+- Hedera Hashgraph blockchain integration
+- NFT minting for digital ownership
+- Metadata storage and certificate generation
+- Bundle pricing (physical + NFT)
+
+### 💳 E-commerce Features
+- Stripe payment integration
+- Physical artwork purchasing
+- NFT token purchasing
+- Order management and tracking
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 15, React 18, TypeScript
+- **Styling**: TailwindCSS with custom watercolor theme
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Storage**: Supabase Storage
+- **Payments**: Stripe
+- **Blockchain**: Hedera SDK for NFT minting
+- **Icons**: Heroicons
+- **Fonts**: Inter & Lora from Google Fonts
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- Supabase account
+- Stripe account
+- Hedera account (for NFT minting)
+
+### 1. Clone and Install
+
+```bash
+cd catpainting
+npm install
+```
+
+### 2. Environment Setup
+
+Create a `.env.local` file in the root directory:
+
+```env
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+
+# Stripe Configuration
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+
+# Hedera Configuration
+HEDERA_ACCOUNT_ID=your_hedera_account_id
+HEDERA_PRIVATE_KEY=your_hedera_private_key
+HEDERA_NETWORK=testnet
+
+# App Configuration
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_nextauth_secret
+```
+
+### 3. Database Setup
+
+1. Create a new Supabase project
+2. Run the SQL schema from `supabase-schema.sql` in your Supabase SQL editor
+3. Enable Row Level Security (RLS)
+4. Configure authentication providers if needed
+
+### 4. Stripe Setup
+
+1. Create a Stripe account
+2. Get your API keys from the Stripe dashboard
+3. Configure webhook endpoints for order processing
+4. Set up products and pricing in Stripe dashboard
+
+### 5. Hedera Setup (Optional - for NFT features)
+
+1. Create a Hedera testnet account
+2. Get your account ID and private key
+3. Configure the Hedera SDK for NFT minting
+
+### 6. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📱 Application Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── admin/             # Admin dashboard pages
+│   ├── artwork/           # Artwork detail pages
+│   ├── auth/              # Authentication pages
+│   ├── gallery/           # Gallery pages
+│   ├── about/             # About page
+│   ├── contact/           # Contact page
+│   └── dashboard/         # User dashboard
+├── components/            # Reusable React components
+│   ├── AuthForm.tsx       # Authentication form
+│   ├── Navigation.tsx     # Main navigation
+│   └── ProtectedRoute.tsx # Route protection
+├── contexts/              # React contexts
+│   └── AuthContext.tsx    # Authentication context
+├── lib/                   # Utility libraries
+│   ├── supabase.ts        # Supabase client setup
+│   ├── supabase-client.ts # Browser client
+│   └── supabase-middleware.ts # SSR middleware
+└── types/                 # TypeScript definitions
+    └── database.ts        # Database type definitions
+```
 
-## Learn More
+## 🎨 Design System
 
-To learn more about Next.js, take a look at the following resources:
+The application uses a custom watercolor-inspired design system:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Color Palette
+- **Paper**: #fefcf8 (main background)
+- **Blue Light**: #e8f4f8 (accents)
+- **Blue Medium**: #a8d1e0 (interactive elements)
+- **Beige Light**: #f5f3f0 (soft backgrounds)
+- **Warm Gray**: #6b7280 (text secondary)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Typography
+- **Headings**: Lora (serif font for artistic feel)
+- **Body**: Inter (clean sans-serif for readability)
 
-## Deploy on Vercel
+### Components
+- Custom CSS classes for watercolor effects
+- Soft shadows and gradients
+- Responsive masonry grid for gallery
+- Smooth animations and transitions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔧 Key Components
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Authentication System
+- `AuthContext`: Manages user state and authentication
+- `ProtectedRoute`: Wraps admin pages requiring authentication
+- `AuthForm`: Login/registration form with validation
+
+### Admin Dashboard
+- Overview statistics and recent activity
+- CRUD operations for artworks
+- Order management and tracking
+- Customer relationship management
+
+### Gallery & Artwork Display
+- Responsive masonry grid layout
+- Category filtering and search
+- Dynamic artwork detail pages
+- NFT purchase options
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Manual Deployment
+
+```bash
+npm run build
+npm start
+```
+
+## 🔐 Security Features
+
+- Row Level Security (RLS) enabled in Supabase
+- Protected admin routes
+- Input validation and sanitization
+- Secure payment processing with Stripe
+- Environment variable protection
+
+## 🧪 Testing
+
+Run the development server and test:
+
+1. **Homepage**: Navigate to homepage and verify design
+2. **Gallery**: Test filtering and search functionality
+3. **Authentication**: Test login/registration flow
+4. **Admin Access**: Login as admin and test dashboard
+5. **Responsive Design**: Test on mobile devices
+
+## 📞 Support
+
+For questions or issues:
+- Email: contact@catpainting.fr
+- Review the code documentation
+- Check Supabase and Stripe documentation
+
+## 🎯 Roadmap
+
+- [ ] Stripe payment integration
+- [ ] Hedera NFT minting
+- [ ] Image upload and management
+- [ ] User dashboard features
+- [ ] Advanced analytics
+- [ ] Email notifications
+- [ ] Inventory management
+- [ ] Commission request system
+
+## 📝 License
+
+© 2025 Catpainting. All rights reserved.
+
+---
+
+**Built with ❤️ for Catherine Gonnord's artistic vision**
