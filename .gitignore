@@ -1,0 +1,61 @@
+# ====================================
+# ✅ SITE STATIQUE UNIQUEMENT
+# Ne pas utiliser Next.js/TypeScript
+# ====================================
+
+# Dépendances Next.js (abandonné)
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+/.next/
+/out/
+/build
+
+# Next.js et TypeScript (NE PAS UTILISER)
+/src
+/app
+/components
+/lib
+/public
+/types
+*.tsx
+*.ts
+!static-site/**/*.js
+next.config.ts
+next-env.d.ts
+tsconfig.json
+middleware.ts
+package.json
+package-lock.json
+
+# Testing
+/coverage
+
+# Environnement
+.env*
+
+# Vercel
+.vercel
+
+# OS
+.DS_Store
+*.pem
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# IDE
+/.vscode
+/.idea
+*.swp
+*.swo
+*.tsbuildinfo
+
+# ====================================
+# ✅ GARDER : /static-site uniquement
+# ====================================

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie - Catherine Gonnord</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/gallery.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="watercolor-bg">
+    <!-- Navigation -->
+    <nav id="navigation" class="nav-sidebar">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <h2 class="logo-text">Catherine Gonnord</h2>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    Accueil
+                </a></li>
+                <li><a href="gallery.html" class="nav-link active">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Galerie
+                </a></li>
+                <li><a href="about.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    À propos
+                </a></li>
+                <li><a href="contact.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Contact
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-container">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="title-serif">Galerie d'Art</h1>
+                <p class="subtitle">Découvrez la collection complète des aquarelles de Catherine Gonnord</p>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Search & Filters -->
+            <div class="search-section mb-12">
+                <div class="search-box">
+                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Rechercher une œuvre..." class="search-input">
+                </div>
+
+                <div class="filters">
+                    <button class="filter-btn active" data-category="all">Toutes les catégories</button>
+                    <button class="filter-btn" data-category="eaux">Eaux</button>
+                    <button class="filter-btn" data-category="escaliers">Escaliers</button>
+                    <button class="filter-btn" data-category="voyages">Voyages</button>
+                </div>
+            </div>
+
+            <!-- Results Count -->
+            <p id="resultsCount" class="results-count mb-8">6 œuvres trouvées</p>
+
+            <!-- Artwork Grid -->
+            <div id="artworkGrid" class="grid grid-cols-3 artwork-grid">
+                <!-- Artworks will be inserted here by JavaScript -->
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="no-results hidden">
+                <h3>Aucune œuvre trouvée</h3>
+                <p>Essayez de modifier vos critères de recherche</p>
+                <button id="resetFilters" class="btn btn-primary mt-4">Réinitialiser les filtres</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/artworks.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>
