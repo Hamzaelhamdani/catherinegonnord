@@ -1,0 +1,35 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond blanc arrondi -->
+  <rect width="180" height="180" rx="20" fill="#fefefe"/>
+  
+  <!-- Cercle principal du logo -->
+  <circle cx="65" cy="90" r="35" fill="#87a96b" stroke="#6b7c5d" stroke-width="3"/>
+  
+  <!-- Détails internes du logo -->
+  <circle cx="65" cy="90" r="22" fill="#4a5d3a"/>
+  <circle cx="65" cy="90" r="12" fill="#2d2d2d"/>
+  
+  <!-- Accent lumineux organique -->
+  <ellipse cx="58" cy="82" rx="8" ry="12" fill="#a4b894" opacity="0.8"/>
+  <ellipse cx="55" cy="78" rx="4" ry="6" fill="#c8d6a5" opacity="0.6"/>
+  
+  <!-- Éléments calligraphiques élégants -->
+  <path d="M110 45 Q135 65 160 45 Q150 90 140 115 Q115 140 90 115" 
+        stroke="#6b7c5d" 
+        stroke-width="6" 
+        fill="none" 
+        stroke-linecap="round"/>
+  
+  <path d="M105 125 Q125 115 145 125 Q135 135 115 135" 
+        stroke="#87a96b" 
+        stroke-width="4" 
+        fill="none" 
+        stroke-linecap="round"/>
+  
+  <!-- Détails supplémentaires pour la richesse visuelle -->
+  <path d="M85 75 Q95 80 105 75" 
+        stroke="#a4b894" 
+        stroke-width="2" 
+        fill="none" 
+        stroke-linecap="round"/>
+</svg>
