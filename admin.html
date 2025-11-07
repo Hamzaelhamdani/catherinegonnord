@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Catherine Gonnord</title>
+    <link rel="icon" type="image/png" href="public/logo.png">
+    <link rel="apple-touch-icon" href="public/logo.png">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <link rel="stylesheet" href="styles/responsive-enhancements.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+</head>
+<body class="watercolor-bg">
+    <!-- Login Section -->
+    <div id="loginSection" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="public/logo.png" alt="Catherine Gonnord" class="login-logo">
+                <h1>Administration</h1>
+                <p>Connectez-vous pour gérer la galerie</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="votre@email.com" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Se connecter</button>
+                <div id="loginError" class="error-message hidden"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="hidden">
+        <!-- Navigation -->
+        <nav id="navigation" class="nav-sidebar">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <img src="public/logo.png" alt="Catherine Gonnord" class="logo-image">
+                        <h2 class="logo-text">Catherine Gonnord</h2>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        Accueil
+                    </a></li>
+                    <li><a href="gallery.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        Galerie
+                    </a></li>
+                    <li><a href="admin.html" class="nav-link active">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        Admin
+                    </a></li>
+                </ul>
+                <div class="nav-footer">
+                    <button id="logoutBtn" class="btn btn-secondary btn-full">
+                        <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                        </svg>
+                        Déconnexion
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content admin-main">
+            <div class="page-container">
+                <!-- Tabs Navigation -->
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="artworks">
+                        <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        Œuvres
+                    </button>
+                    <button class="tab-btn" data-tab="messages">
+                        <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Messages
+                        <span id="unreadCount" class="badge hidden">0</span>
+                    </button>
+                </div>
+
+                <!-- Artworks Tab -->
+                <div id="artworksTab" class="tab-content active">
+                    <div class="admin-header">
+                        <h1>Gestion de la Galerie</h1>
+                        <button id="addArtworkBtn" class="btn btn-primary">
+                            <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                            </svg>
+                            Ajouter une œuvre
+                        </button>
+                    </div>
+
+                    <!-- Artworks Table -->
+                    <div class="admin-table-container">
+                        <table class="admin-table" id="artworksTable">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Titre</th>
+                                    <th>Catégorie</th>
+                                    <th>Dimensions</th>
+                                    <th>Prix</th>
+                                    <th>Année</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="artworksTableBody">
+                                <!-- Filled by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Messages Tab -->
+            <div id="messagesTab" class="tab-content">
+                <div class="admin-header">
+                    <h1>Messages de Contact</h1>
+                    <div class="message-filters">
+                        <button class="filter-toggle active" data-filter="all">Tous</button>
+                        <button class="filter-toggle" data-filter="unread">Non lus</button>
+                        <button class="filter-toggle" data-filter="read">Lus</button>
+                    </div>
+                </div>
+
+                <!-- Messages List -->
+                <div class="messages-container" id="messagesContainer">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+        </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Artwork Modal -->
+    <div id="artworkModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Ajouter une œuvre</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form id="artworkForm" class="modal-form">
+                <input type="hidden" id="artworkId">
+                
+                <div class="form-group">
+                    <label for="artworkTitle">Titre *</label>
+                    <input type="text" id="artworkTitle" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="artworkTheme">Thème *</label>
+                        <select id="artworkTheme" required>
+                            <option value="">Sélectionnez un thème</option>
+                            <option value="abstractions">Abstractions</option>
+                            <option value="architecture">Architecture</option>
+                            <option value="eaux">Eaux</option>
+                            <option value="escaliers">Escaliers</option>
+                            <option value="interieurs">Intérieurs</option>
+                            <option value="saisons">Saisons</option>
+                            <option value="paysages">Paysages</option>
+                            <option value="villes">Villes</option>
+                            <option value="voyages">Voyages</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="artworkYear">Année *</label>
+                        <input type="number" id="artworkYear" min="1900" max="2100" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="artworkTechnique">Technique *</label>
+                        <select id="artworkTechnique" required>
+                            <option value="">Sélectionnez une technique</option>
+                            <option value="aquarelle">Aquarelle</option>
+                            <option value="gouache">Gouache</option>
+                            <option value="encre">Encre</option>
+                            <option value="mixte">Mixte</option>
+                            <option value="dessin">Dessin</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="artworkSupport">Support *</label>
+                        <select id="artworkSupport" required>
+                            <option value="">Sélectionnez un support</option>
+                            <option value="papier">Papier</option>
+                            <option value="toile">Toile</option>
+                            <option value="carton">Carton</option>
+                            <option value="bois">Bois</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="artworkFormat">Format *</label>
+                        <select id="artworkFormat" required>
+                            <option value="">Sélectionnez un format</option>
+                            <option value="petit">Petit</option>
+                            <option value="moyen">Moyen</option>
+                            <option value="grand">Grand</option>
+                            <option value="panoramique">Panoramique</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="artworkOrientation">Orientation *</label>
+                        <select id="artworkOrientation" required>
+                            <option value="">Sélectionnez une orientation</option>
+                            <option value="portrait">Portrait</option>
+                            <option value="paysage">Paysage</option>
+                            <option value="carre">Carré</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="artworkStyle">Style *</label>
+                        <select id="artworkStyle" required>
+                            <option value="">Sélectionnez un style</option>
+                            <option value="figuratif">Figuratif</option>
+                            <option value="semi-abstrait">Semi-abstrait</option>
+                            <option value="abstrait">Abstrait</option>
+                            <option value="decoratif">Décoratif</option>
+                            <option value="contemporain">Contemporain</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="artworkEncadrement">Encadrement</label>
+                        <select id="artworkEncadrement" required>
+                            <option value="false">Non encadré</option>
+                            <option value="true">Encadré</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="artworkMedium">Détails médium</label>
+                    <input type="text" id="artworkMedium" placeholder="Ex: Aquarelle sur papier Arches 300g">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="artworkDimensions">Dimensions *</label>
+                        <input type="text" id="artworkDimensions" placeholder="Ex: 30 x 40 cm" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="artworkPrice">Prix (€) *</label>
+                        <input type="number" id="artworkPrice" step="0.01" placeholder="Ex: 850.00" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="artworkDescription">Description</label>
+                    <textarea id="artworkDescription" rows="4" placeholder="Description détaillée de l'œuvre..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="artworkImage">Image de l'œuvre</label>
+                    <input type="file" id="artworkImage" accept="image/*">
+                    <div id="imagePreview" class="image-preview hidden">
+                        <img id="previewImg" src="" alt="Aperçu">
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Annuler</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span id="submitBtnText">Enregistrer</span>
+                    </button>
+                </div>
+
+                <div id="formError" class="error-message hidden"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom Confirm Dialog -->
+    <div id="confirmDialog" class="confirm-dialog hidden">
+        <div class="confirm-content">
+            <div class="confirm-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+            </div>
+            <h3 id="confirmTitle">Confirmer la suppression</h3>
+            <p id="confirmMessage">Êtes-vous sûr de vouloir supprimer cette œuvre ?</p>
+            <div class="confirm-actions">
+                <button type="button" class="btn btn-secondary" id="confirmCancel">Annuler</button>
+                <button type="button" class="btn btn-danger" id="confirmOk">Supprimer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,39 +1,22 @@
 # ====================================
 # ✅ SITE STATIQUE UNIQUEMENT
-# Ne pas utiliser Next.js/TypeScript
 # ====================================
 
-# Dépendances Next.js (abandonné)
+# Dépendances
 /node_modules
 /.pnp
 .pnp.*
 .yarn/*
-/.next/
-/out/
-/build
-
-# Next.js et TypeScript (NE PAS UTILISER)
-/src
-/app
-/components
-/lib
-/public
-/types
-*.tsx
-*.ts
-!static-site/**/*.js
-next.config.ts
-next-env.d.ts
-tsconfig.json
-middleware.ts
-package.json
-package-lock.json
 
 # Testing
 /coverage
 
 # Environnement
 .env*
+
+# Configuration Supabase (ne pas commiter les vraies clés)
+# Utilisez config.js.example comme modèle
+/js/config.production.js
 
 # Vercel
 .vercel

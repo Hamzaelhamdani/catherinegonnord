@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie - Catherine Gonnord</title>
+    <link rel="icon" type="image/png" href="public/logo.png">
+    <link rel="apple-touch-icon" href="public/logo.png">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/gallery.css">
+    <link rel="stylesheet" href="gallery-filters.css">
+    <link rel="stylesheet" href="artwork-popup.css">
+    <link rel="stylesheet" href="responsive-enhancements.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="watercolor-bg">
+    <!-- Navigation -->
+    <nav id="navigation" class="nav-sidebar">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="public/logo.png" alt="Catherine Gonnord" class="logo-image">
+                    <h2 class="logo-text">Catherine Gonnord</h2>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    Accueil
+                </a></li>
+                <li><a href="gallery.html" class="nav-link active">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Galerie
+                </a></li>
+                <li><a href="about.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    À propos
+                </a></li>
+                <li><a href="contact.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Contact
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-container">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="title-serif">Galerie d'Art</h1>
+                <p class="subtitle">Découvrez la collection complète des aquarelles de Catherine Gonnord</p>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Search & Filters -->
+            <div class="search-section mb-12">
+                <!-- Search Bar -->
+                <div class="search-box mb-6">
+                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Rechercher une œuvre..." class="search-input">
+                </div>
+
+                <!-- Filters Container -->
+                <div class="filters-modern">
+                    <!-- Main Filters Grid -->
+                    <div class="filters-main-grid">
+                        <select id="themeFilter" class="filter-select-modern">
+                            <option value="">Tous les thèmes</option>
+                            <option value="abstractions">Abstractions</option>
+                            <option value="architecture">Architecture</option>
+                            <option value="eaux">Eaux</option>
+                            <option value="escaliers">Escaliers</option>
+                            <option value="interieurs">Intérieurs</option>
+                            <option value="saisons">Saisons</option>
+                            <option value="paysages">Paysages</option>
+                            <option value="villes">Villes</option>
+                            <option value="voyages">Voyages</option>
+                        </select>
+
+                        <select id="techniqueFilter" class="filter-select-modern">
+                            <option value="">Toutes techniques</option>
+                            <option value="aquarelle">Aquarelle</option>
+                            <option value="encre">Encre</option>
+                            <option value="mixte">Technique mixte</option>
+                            <option value="crayon">Crayon</option>
+                            <option value="pastel">Pastel</option>
+                        </select>
+
+                        <select id="supportFilter" class="filter-select-modern">
+                            <option value="">Tous supports</option>
+                            <option value="papier">Papier</option>
+                            <option value="toile">Toile</option>
+                            <option value="carton">Carton</option>
+                            <option value="bois">Bois</option>
+                        </select>
+
+                        <select id="formatFilter" class="filter-select-modern">
+                            <option value="">Tous formats</option>
+                            <option value="petit">Petit</option>
+                            <option value="moyen">Moyen</option>
+                            <option value="grand">Grand</option>
+                            <option value="monumental">Monumental</option>
+                        </select>
+
+                        <select id="orientationFilter" class="filter-select-modern">
+                            <option value="">Toutes orientations</option>
+                            <option value="portrait">Portrait</option>
+                            <option value="paysage">Paysage</option>
+                            <option value="carre">Carré</option>
+                        </select>
+
+                        <select id="styleFilter" class="filter-select-modern">
+                            <option value="">Tous styles</option>
+                            <option value="realiste">Réaliste</option>
+                            <option value="impressionniste">Impressionniste</option>
+                            <option value="abstrait">Abstrait</option>
+                            <option value="expressionniste">Expressionniste</option>
+                            <option value="contemporain">Contemporain</option>
+                        </select>
+                    </div>
+
+                    <!-- Secondary Filters -->
+                    <div class="filters-secondary">
+                        <!-- Price Range -->
+                        <div class="price-filter-modern">
+                            <div class="price-header">
+                                <span class="price-label">Prix maximum</span>
+                                <span class="price-value" id="maxPriceDisplay">10000 €</span>
+                            </div>
+                            <input type="range" id="priceRange" min="0" max="10000" step="100" value="10000" class="price-slider-modern">
+                            <div class="price-marks">
+                                <span>0 €</span>
+                                <span>5000 €</span>
+                                <span>10000 €</span>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Actions -->
+                        <div class="filters-actions">
+                            <select id="yearFilter" class="filter-select-modern">
+                                <option value="">Toutes années</option>
+                                <!-- Years will be populated dynamically -->
+                            </select>
+
+                            <label class="filter-checkbox-modern">
+                                <input type="checkbox" id="encadrementFilter">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">Œuvres encadrées</span>
+                            </label>
+
+                            <button id="resetAllFilters" class="btn-reset-modern">
+                                <svg class="icon-reset" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                </svg>
+                                Réinitialiser
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Count -->
+            <p id="resultsCount" class="results-count mb-8">6 œuvres trouvées</p>
+
+            <!-- Artwork Grid -->
+            <div id="artworkGrid" class="grid grid-cols-3 artwork-grid">
+                <!-- Artworks will be inserted here by JavaScript -->
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="no-results hidden">
+                <h3>Aucune œuvre trouvée</h3>
+                <p>Essayez de modifier vos critères de recherche</p>
+                <button id="resetFilters" class="btn btn-primary mt-4">Réinitialiser les filtres</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Artwork Detail Popup -->
+    <div id="artworkPopup" class="artwork-popup-overlay">
+        <div class="artwork-popup">
+            <!-- Close Button -->
+            <button class="popup-close" onclick="closeArtworkPopup()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Popup Content -->
+            <div class="popup-content">
+                <!-- Image Section -->
+                <div class="popup-image-section">
+                    <div class="popup-image-container" id="popupImageContainer">
+                        <!-- Image will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Details Section -->
+                <div class="popup-details-section">
+                    <!-- Header -->
+                    <div class="popup-header">
+                        <span class="popup-category" id="popupCategory">AQUARELLE</span>
+                        <h2 class="popup-title" id="popupTitle">Titre de l'œuvre</h2>
+                        <p class="popup-year" id="popupYear">2024</p>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="popup-price-section">
+                        <div class="popup-price-label">Prix</div>
+                        <div class="popup-price" id="popupPrice">1200 €</div>
+                    </div>
+
+                    <!-- Details Grid -->
+                    <div class="popup-details-grid">
+                        <div class="detail-item">
+                            <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                            </svg>
+                            <div class="detail-content">
+                                <h4>Technique</h4>
+                                <p id="popupTechnique">Aquarelle</p>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <div class="detail-content">
+                                <h4>Support</h4>
+                                <p id="popupSupport">Papier</p>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                            </svg>
+                            <div class="detail-content">
+                                <h4>Dimensions</h4>
+                                <p id="popupDimensions">30 × 40 cm</p>
+                            </div>
+                        </div>
+
+                        <div class="detail-item" id="popupEncadrementItem">
+                            <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <div class="detail-content">
+                                <h4>Encadrement</h4>
+                                <p id="popupEncadrement">Non encadrée</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description (if available) -->
+                    <div class="popup-description" id="popupDescriptionSection" style="display: none;">
+                        <h4>Description</h4>
+                        <p id="popupDescription"></p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="popup-actions">
+                        <button class="btn-buy" id="btnBuyArtwork">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                            Acheter
+                        </button>
+                        <button class="btn-contact" onclick="window.location.href='contact.html'">
+                            Contact
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/artwork-popup.js"></script>
+    <script src="js/config.js"></script>
+    <script type="module" src="js/gallery.js"></script>
+</body>
+</html>

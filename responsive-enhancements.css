@@ -1,0 +1,731 @@
+/* ===========================================
+   RESPONSIVE ENHANCEMENTS - Catherine Gonnord
+   Design responsive pour tous types d'écrans
+   =========================================== */
+
+/* Base responsive utilities */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ====================
+   NAVIGATION RESPONSIVE
+   ==================== */
+
+/* Tablettes */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .nav-sidebar {
+        width: 100%;
+        height: 60px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: none;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    
+    .nav-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0 2rem;
+    }
+    
+    /* Cacher le logo sur tablette */
+    .nav-logo {
+        display: none !important;
+    }
+    
+    /* Menu centré avec espacement équilibré */
+    .nav-links {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around;
+        width: 100%;
+        max-width: 600px;
+        gap: 0;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    
+    .nav-links li {
+        flex: 1;
+        margin: 0;
+    }
+    
+    .nav-link {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        text-decoration: none;
+    }
+    
+    .nav-icon {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+        padding-top: 75px !important;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    /* Navigation devient une barre horizontale compacte en haut */
+    .nav-sidebar {
+        width: 100%;
+        height: 60px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: none;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0 0.5rem;
+        max-width: 100%;
+        overflow: visible;
+    }
+    
+    /* Cacher le logo sur mobile */
+    .nav-logo {
+        display: none !important;
+    }
+    
+    /* Menu réparti sur toute la largeur */
+    .nav-links {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around;
+        width: 100%;
+        gap: 0;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    
+    .nav-links li {
+        flex: 1;
+        margin: 0;
+    }
+    
+    .nav-link {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        justify-content: center;
+        gap: 0.2rem;
+        padding: 0.5rem 0.25rem;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        text-align: center;
+        text-decoration: none;
+    }
+    
+    .nav-icon {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+    }
+    
+    /* Contenu principal avec padding pour la nav fixe */
+    .main-content {
+        margin-left: 0 !important;
+        padding-top: 75px !important;
+    }
+    
+    .page-container {
+        padding: 2rem 1rem !important;
+    }
+}
+
+/* ====================
+   GALLERY FILTERS MOBILE
+   ==================== */
+
+@media (max-width: 768px) {
+    /* Gallery Header */
+    .title-serif {
+        font-size: 2rem !important;
+    }
+    
+    .subtitle {
+        font-size: 0.95rem !important;
+    }
+    
+    .text-center.mb-12 {
+        margin-bottom: 2rem !important;
+    }
+    
+    .search-section {
+        margin-bottom: 2rem !important;
+    }
+    
+    .search-box {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    /* Filters */
+    .filters-modern {
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+    }
+    
+    .filters-main-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .filters-actions {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .filter-select-modern {
+        font-size: 0.875rem;
+        padding: 0.75rem 0.875rem;
+    }
+    
+    .price-filter-modern {
+        padding: 1.25rem;
+    }
+    
+    .filters-secondary {
+        margin-top: 1rem;
+    }
+}
+
+/* ====================
+   ARTWORK GRID RESPONSIVE
+   ==================== */
+
+@media (max-width: 1200px) {
+    .artwork-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .artwork-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+    
+    .artwork-card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+/* ====================
+   POPUP RESPONSIVE
+   ==================== */
+
+@media (max-width: 1024px) {
+    .artwork-popup {
+        width: 90%;
+        max-height: 90vh;
+    }
+    
+    .popup-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .popup-image-section {
+        border-radius: 20px 20px 0 0;
+        padding: 2rem;
+        min-height: 300px;
+    }
+    
+    .popup-image-container {
+        max-width: 400px;
+    }
+    
+    .popup-details-section {
+        padding: 2rem;
+    }
+    
+    .popup-title {
+        font-size: 1.75rem;
+    }
+    
+    .popup-price {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .artwork-popup {
+        width: 95%;
+        max-height: 95vh;
+        border-radius: 16px;
+    }
+    
+    .popup-image-section {
+        padding: 1.5rem;
+        min-height: 250px;
+    }
+    
+    .popup-image-container {
+        max-width: 100%;
+    }
+    
+    .popup-details-section {
+        padding: 1.5rem;
+    }
+    
+    .popup-title {
+        font-size: 1.5rem;
+    }
+    
+    .popup-price {
+        font-size: 1.75rem;
+    }
+    
+    .popup-details-grid {
+        gap: 1.25rem;
+    }
+    
+    .popup-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .btn-buy,
+    .btn-contact {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .popup-close {
+        width: 36px;
+        height: 36px;
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .popup-close svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* ====================
+   ADMIN PANEL RESPONSIVE
+   ==================== */
+
+@media (max-width: 1200px) {
+    .admin-container {
+        padding: 1.5rem;
+    }
+    
+    .admin-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .admin-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -1.5rem;
+        padding: 0 1.5rem;
+    }
+    
+    .admin-table {
+        min-width: 900px;
+        font-size: 0.9rem;
+    }
+    
+    .admin-table td,
+    .admin-table th {
+        padding: 0.75rem 0.5rem;
+        white-space: nowrap;
+    }
+    
+    .admin-table img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .tab-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Table responsive avec scroll visible */
+    .admin-table-container {
+        margin: 0 -1rem;
+        padding: 0 1rem;
+        border: 1px solid rgba(90, 107, 71, 0.2);
+        border-radius: 12px;
+        background: linear-gradient(90deg, #fff 0%, transparent 5%, transparent 95%, #fff 100%);
+        background-size: 100% 100%;
+        position: relative;
+    }
+    
+    .admin-table-container::before {
+        content: '⟵ Faites défiler ⟶';
+        display: block;
+        text-align: center;
+        padding: 0.5rem;
+        font-size: 0.75rem;
+        color: var(--sage);
+        font-weight: 500;
+        background: rgba(90, 107, 71, 0.05);
+        border-radius: 8px 8px 0 0;
+        margin-bottom: 0.5rem;
+    }
+    
+    .admin-table {
+        min-width: 750px;
+        font-size: 0.85rem;
+    }
+    
+    .admin-table td,
+    .admin-table th {
+        padding: 0.625rem 0.5rem;
+    }
+    
+    .admin-table img {
+        width: 45px;
+        height: 45px;
+    }
+    
+    /* Boutons d'action plus visibles */
+    .admin-table .btn-icon {
+        padding: 0.5rem;
+        min-width: 36px;
+        min-height: 36px;
+    }
+    
+    .admin-table .btn-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn,
+    .btn-secondary {
+        width: 100%;
+    }
+    
+    .message-card {
+        padding: 1.25rem;
+    }
+    
+    .message-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .message-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+    
+    .message-actions button {
+        flex: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-container {
+        padding: 1rem;
+    }
+    
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .logout-btn {
+        width: 100%;
+    }
+    
+    .tab-btn {
+        flex: 1;
+        min-width: 0;
+        padding: 0.625rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    /* Table encore plus compact sur petit mobile */
+    .admin-table-container {
+        margin: 0 -0.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    .admin-table {
+        min-width: 650px;
+        font-size: 0.8rem;
+    }
+    
+    .admin-table td,
+    .admin-table th {
+        padding: 0.5rem 0.375rem;
+    }
+    
+    .admin-table img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .admin-table .btn-icon {
+        padding: 0.375rem;
+        min-width: 32px;
+        min-height: 32px;
+        font-size: 0.75rem;
+    }
+    
+    .admin-table .btn-icon svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .filters-toggle {
+        flex-direction: column;
+    }
+    
+    .filter-btn {
+        width: 100%;
+    }
+}
+
+/* ====================
+   CONTACT PAGE RESPONSIVE
+   ==================== */
+
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px; /* Évite le zoom sur iOS */
+    }
+}
+
+/* ====================
+   ABOUT PAGE RESPONSIVE
+   ==================== */
+
+@media (max-width: 768px) {
+    .bio-section {
+        padding: 2rem 1.5rem;
+    }
+    
+    .themes-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .themes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====================
+   SEARCH BAR RESPONSIVE
+   ==================== */
+
+@media (max-width: 640px) {
+    .search-box {
+        max-width: 100%;
+    }
+    
+    .search-input {
+        font-size: 16px; /* Évite le zoom sur iOS */
+        padding: 0.875rem 1rem 0.875rem 3rem;
+    }
+}
+
+/* ====================
+   UTILITIES RESPONSIVE
+   ==================== */
+
+@media (max-width: 768px) {
+    .page-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .text-center h1,
+    .title-serif {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .mb-12 {
+        margin-bottom: 3rem;
+    }
+    
+    .mb-8 {
+        margin-bottom: 2rem;
+    }
+}
+
+/* ====================
+   TOUCH IMPROVEMENTS
+   ==================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Écrans tactiles */
+    .btn,
+    .btn-buy,
+    .btn-contact,
+    .btn-reset-modern,
+    .filter-select-modern {
+        min-height: 44px; /* Taille tactile recommandée */
+    }
+    
+    .nav-link,
+    .tab-btn {
+        min-height: 48px;
+    }
+    
+    .artwork-card {
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(90, 107, 71, 0.1);
+    }
+}
+
+/* ====================
+   SMALL MOBILE (<480px)
+   ==================== */
+
+@media (max-width: 480px) {
+    .nav-link {
+        padding: 0.5rem 0.125rem;
+        font-size: 0.65rem;
+        gap: 0.15rem;
+    }
+    
+    .nav-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .title-serif {
+        font-size: 1.75rem !important;
+    }
+    
+    .subtitle {
+        font-size: 0.875rem !important;
+    }
+    
+    .filter-select-modern {
+        font-size: 0.8125rem;
+        padding: 0.625rem 0.75rem;
+    }
+}
+
+/* ====================
+   LANDSCAPE ORIENTATION (Mobile)
+   ==================== */
+
+@media (max-width: 896px) and (orientation: landscape) {
+    .popup-content {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .popup-image-section {
+        border-radius: 20px 0 0 20px;
+        min-height: auto;
+    }
+    
+    .artwork-popup {
+        max-height: 95vh;
+    }
+}
+
+/* ====================
+   PRINT STYLES
+   ==================== */
+
+@media print {
+    .nav-sidebar,
+    .filters-modern,
+    .btn,
+    .popup-close {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .artwork-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ====================
+   HIGH DPI SCREENS
+   ==================== */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .logo-image,
+    .artwork-image img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}

@@ -1,0 +1,318 @@
+/* Modern Filters Design */
+.search-box {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem 1.25rem 1rem 3.5rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #5a6b47;
+    box-shadow: 0 0 0 4px rgba(90, 107, 71, 0.1);
+}
+
+/* Filters Container */
+.filters-modern {
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Main Filters Grid - 3x2 Layout */
+.filters-main-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filter-select-modern {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: #374151;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    accent-color: #5a6b47;
+}
+
+.filter-select-modern:hover {
+    border-color: #5a6b47;
+    background: #f9fafb;
+}
+
+.filter-select-modern:focus {
+    outline: none;
+    border-color: #5a6b47;
+    background: #f4f6f3;
+    box-shadow: 0 0 0 4px rgba(90, 107, 71, 0.1);
+}
+
+/* Style for selected/highlighted option */
+.filter-select-modern option {
+    padding: 0.5rem;
+}
+
+.filter-select-modern option:checked,
+.filter-select-modern option:hover {
+    background: #5a6b47 !important;
+    color: white !important;
+}
+
+/* Firefox specific */
+@-moz-document url-prefix() {
+    .filter-select-modern option:checked {
+        background: #5a6b47 !important;
+        color: white !important;
+    }
+}
+
+/* Secondary Filters */
+.filters-secondary {
+    border-top: 2px solid #e5e7eb;
+    padding-top: 2rem;
+}
+
+/* Price Filter Modern */
+.price-filter-modern {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+}
+
+.price-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.price-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.price-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #5a6b47;
+}
+
+.price-slider-modern {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #5a6b47 0%, #8b9976 50%, #e5e7eb 100%);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.price-slider-modern::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #5a6b47;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.price-slider-modern::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(90, 107, 71, 0.4);
+}
+
+.price-slider-modern::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #5a6b47;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.price-slider-modern::-moz-range-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(90, 107, 71, 0.4);
+}
+
+.price-marks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+/* Bottom Actions */
+.filters-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Modern Checkbox */
+.filter-checkbox-modern {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.filter-checkbox-modern:hover {
+    border-color: #5a6b47;
+    background: #f9fafb;
+}
+
+.filter-checkbox-modern input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d1d5db;
+    border-radius: 5px;
+    background: white;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.filter-checkbox-modern input[type="checkbox"]:checked + .checkbox-custom {
+    background: #5a6b47;
+    border-color: #5a6b47;
+}
+
+.filter-checkbox-modern input[type="checkbox"]:checked + .checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.checkbox-text {
+    font-size: 0.95rem;
+    color: #374151;
+    font-weight: 500;
+}
+
+/* Reset Button Modern */
+.btn-reset-modern {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #5a6b47 0%, #6b7c58 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(90, 107, 71, 0.3);
+}
+
+.btn-reset-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(90, 107, 71, 0.4);
+    background: linear-gradient(135deg, #4a5a37 0%, #5a6b47 100%);
+}
+
+.btn-reset-modern:active {
+    transform: translateY(0);
+}
+
+.icon-reset {
+    width: 18px;
+    height: 18px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .filters-main-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .filters-actions {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .btn-reset-modern {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .filters-modern {
+        padding: 1.5rem;
+    }
+    
+    .filters-main-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .filters-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .price-filter-modern {
+        padding: 1rem;
+    }
+}
