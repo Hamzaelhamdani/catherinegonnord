@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/gallery.css">
     <link rel="stylesheet" href="gallery-filters.css">
-    <link rel="stylesheet" href="artwork-popup.css">
     <link rel="stylesheet" href="responsive-enhancements.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -188,107 +187,8 @@
         </div>
     </main>
 
-    <!-- Artwork Detail Popup -->
-    <div id="artworkPopup" class="artwork-popup-overlay">
-        <div class="artwork-popup">
-            <!-- Close Button -->
-            <button class="popup-close" onclick="closeArtworkPopup()">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
-
-            <!-- Popup Content -->
-            <div class="popup-content">
-                <!-- Image Section -->
-                <div class="popup-image-section">
-                    <div class="popup-image-container" id="popupImageContainer">
-                        <!-- Image will be inserted here -->
-                    </div>
-                </div>
-
-                <!-- Details Section -->
-                <div class="popup-details-section">
-                    <!-- Header -->
-                    <div class="popup-header">
-                        <span class="popup-category" id="popupCategory">AQUARELLE</span>
-                        <h2 class="popup-title" id="popupTitle">Titre de l'œuvre</h2>
-                        <p class="popup-year" id="popupYear">2024</p>
-                    </div>
-
-                    <!-- Price -->
-                    <div class="popup-price-section">
-                        <div class="popup-price-label">Prix</div>
-                        <div class="popup-price" id="popupPrice">1200 €</div>
-                    </div>
-
-                    <!-- Details Grid -->
-                    <div class="popup-details-grid">
-                        <div class="detail-item">
-                            <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
-                            </svg>
-                            <div class="detail-content">
-                                <h4>Technique</h4>
-                                <p id="popupTechnique">Aquarelle</p>
-                            </div>
-                        </div>
-
-                        <div class="detail-item">
-                            <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                            <div class="detail-content">
-                                <h4>Support</h4>
-                                <p id="popupSupport">Papier</p>
-                            </div>
-                        </div>
-
-                        <div class="detail-item">
-                            <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
-                            </svg>
-                            <div class="detail-content">
-                                <h4>Dimensions</h4>
-                                <p id="popupDimensions">30 × 40 cm</p>
-                            </div>
-                        </div>
-
-                        <div class="detail-item" id="popupEncadrementItem">
-                            <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <div class="detail-content">
-                                <h4>Encadrement</h4>
-                                <p id="popupEncadrement">Non encadrée</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Description (if available) -->
-                    <div class="popup-description" id="popupDescriptionSection" style="display: none;">
-                        <h4>Description</h4>
-                        <p id="popupDescription"></p>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="popup-actions">
-                        <button class="btn-buy" id="btnBuyArtwork">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                            </svg>
-                            Acheter
-                        </button>
-                        <button class="btn-contact" onclick="window.location.href='contact.html'">
-                            Contact
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="js/artwork-popup.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/config.js"></script>
     <script type="module" src="js/gallery.js"></script>
 </body>

@@ -138,10 +138,10 @@ function createArtworkCard(artwork) {
     
     // Add click handler for the card
     card.addEventListener('click', (e) => {
-        // Don't open popup if clicking on the "Voir détails" button directly
+        // Don't open page if clicking on the "Voir détails" button directly
         // (button has its own handler below)
         if (!e.target.classList.contains('btn-view-details')) {
-            openArtworkPopup(artwork);
+            window.location.href = `artwork.html?id=${artwork.id}`;
         }
     });
     
@@ -150,7 +150,7 @@ function createArtworkCard(artwork) {
     if (viewDetailsBtn) {
         viewDetailsBtn.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent card click
-            openArtworkPopup(artwork);
+            window.location.href = `artwork.html?id=${artwork.id}`;
         });
     }
     

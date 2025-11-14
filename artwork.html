@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Œuvre - Catherine Gonnord</title>
+    <link rel="icon" type="image/png" href="public/logo.png">
+    <link rel="apple-touch-icon" href="public/logo.png">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/artwork.css">
+    <link rel="stylesheet" href="responsive-enhancements.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="watercolor-bg">
+    <!-- Navigation -->
+    <nav id="navigation" class="nav-sidebar">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="public/logo.png" alt="Catherine Gonnord" class="logo-image">
+                    <h2 class="logo-text">Catherine Gonnord</h2>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    Accueil
+                </a></li>
+                <li><a href="gallery.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Galerie
+                </a></li>
+                <li><a href="about.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    À propos
+                </a></li>
+                <li><a href="contact.html" class="nav-link">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Contact
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="artwork-page-container">
+            <!-- Loading State -->
+            <div id="loadingState" class="loading-state">
+                <div class="spinner"></div>
+                <p>Chargement de l'œuvre...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="error-state hidden">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <h2>Œuvre introuvable</h2>
+                <p>L'œuvre que vous recherchez n'existe pas ou a été supprimée.</p>
+                <a href="gallery.html" class="btn btn-primary">Retour à la galerie</a>
+            </div>
+
+            <!-- Artwork Content -->
+            <div id="artworkContent" class="artwork-content hidden">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="index.html">Accueil</a>
+                    <span class="separator">›</span>
+                    <a href="gallery.html">Galerie</a>
+                    <span class="separator">›</span>
+                    <span id="breadcrumbTitle">Œuvre</span>
+                </nav>
+
+                <!-- Artwork Grid -->
+                <div class="artwork-grid">
+                    <!-- Image Section -->
+                    <div class="artwork-image-section">
+                        <div class="artwork-image-container" id="artworkImageContainer">
+                            <!-- Image will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Details Section -->
+                    <div class="artwork-details-section">
+                        <!-- Header -->
+                        <div class="artwork-header">
+                            <span class="artwork-category" id="artworkCategory">AQUARELLE</span>
+                            <h1 class="artwork-title" id="artworkTitle">Titre de l'œuvre</h1>
+                            <p class="artwork-year" id="artworkYear">2024</p>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="artwork-price-section">
+                            <div class="price-label">Prix</div>
+                            <div class="price-amount" id="artworkPrice">1200 €</div>
+                        </div>
+
+                        <!-- Details Grid -->
+                        <div class="artwork-details-grid">
+                            <div class="detail-item">
+                                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                                </svg>
+                                <div class="detail-content">
+                                    <h4>Technique</h4>
+                                    <p id="artworkTechnique">Aquarelle</p>
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                <div class="detail-content">
+                                    <h4>Support</h4>
+                                    <p id="artworkSupport">Papier</p>
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                                </svg>
+                                <div class="detail-content">
+                                    <h4>Dimensions</h4>
+                                    <p id="artworkDimensions">30 × 40 cm</p>
+                                </div>
+                            </div>
+
+                            <div class="detail-item" id="artworkEncadrementItem">
+                                <svg class="detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <div class="detail-content">
+                                    <h4>Encadrement</h4>
+                                    <p id="artworkEncadrement">Non encadrée</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="artwork-description" id="artworkDescriptionSection" style="display: none;">
+                            <h4>Description</h4>
+                            <p id="artworkDescription"></p>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="artwork-actions">
+                            <button class="btn-buy" id="btnBuyArtwork">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                </svg>
+                                Acheter
+                            </button>
+                            <a href="contact.html" class="btn-contact">
+                                Contact
+                            </a>
+                        </div>
+
+                        <!-- Back to Gallery -->
+                        <a href="gallery.html" class="btn-back">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                            </svg>
+                            Retour à la galerie
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script type="module" src="js/artwork.js"></script>
+</body>
+</html>

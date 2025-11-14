@@ -320,6 +320,43 @@ p {
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 
 /* Responsive */
+
+/* Écrans moyens et moyens-larges : 10-17 pouces (768px - 1777px) */
+@media (min-width: 768px) and (max-width: 1777px) {
+    /* Pages autres que l'accueil : nav complètement masquée */
+    body:not(.home-page) .nav-sidebar {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    
+    /* Retirer la marge gauche pour toutes les pages sauf accueil */
+    body:not(.home-page) .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    body:not(.home-page) .page-container {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Page d'accueil : garder la nav visible */
+    body.home-page .nav-sidebar {
+        position: fixed;
+        transform: translateX(0);
+    }
+    
+    body.home-page .landing-container {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* Tablettes et petits écrans (max 1024px) */
 @media (max-width: 1024px) {
     .nav-sidebar {
         transform: translateX(-100%);
@@ -359,7 +396,7 @@ p {
 .mb-8 { margin-bottom: 2rem; }
 .mb-12 { margin-bottom: 3rem; }
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 .block { display: block; }
 
 /* Animations */
