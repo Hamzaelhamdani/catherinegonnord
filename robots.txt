@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://catherinegonnord.com/sitemap.xml
+
+# Interdire les dossiers système et fichiers de configuration
+Disallow: /js/config.js
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /build/
+
+# Autoriser tous les tableaux (artwork pages)
+Allow: /artwork.html
+
+# Crawl delay (optionnel, pour éviter surcharge serveur)
+Crawl-delay: 1

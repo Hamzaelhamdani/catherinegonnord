@@ -70,29 +70,85 @@ function displayArtwork(artwork) {
     errorState.classList.add('hidden');
     artworkContent.classList.remove('hidden');
 
+    // Update page title and meta tags for SEO
+    const artworkTitle = artwork.title || 'Sans titre';
+    const artworkYear = artwork.year || '';
+    const category = getCategoryLabel(artwork.theme || artwork.category || 'aquarelle');
+    const price = artwork.price ? `${artwork.price} €` : 'Prix sur demande';
+    
     // Update page title
-    document.title = `${artwork.title} - Catherine Gonnord`;
+    document.title = `${artworkTitle} (${artworkYear}) - Aquarelle ${category} par Catherine Gonnord | À Vendre`;
+    
+    // Update meta description
+    const description = `${artworkTitle} - Aquarelle originale ${category.toLowerCase()} de ${artworkYear} par Catherine Gonnord. ${artwork.technique || 'Aquarelle'}. Dimensions: ${artwork.dimensions || 'sur demande'}. Prix: ${price}. ${artwork.description || 'Œuvre unique disponible à l\'achat.'}`;
+    document.getElementById('page-description').setAttribute('content', description.substring(0, 160));
+    
+    // Update Open Graph tags
+    const currentUrl = `https://catherinegonnord.com/artwork.html?id=${artwork.id}`;
+    document.getElementById('og-url').setAttribute('content', currentUrl);
+    document.getElementById('og-title').setAttribute('content', `${artworkTitle} - ${category} ${artworkYear}`);
+    document.getElementById('og-description').setAttribute('content', description.substring(0, 200));
+    document.getElementById('canonical-url').setAttribute('href', currentUrl);
+    
+    if (artwork.image_url) {
+        document.getElementById('og-image').setAttribute('content', artwork.image_url);
+    }
+    
+    // Add structured data for the artwork
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "VisualArtwork",
+        "name": artworkTitle,
+        "image": artwork.image_url || "https://catherinegonnord.com/public/logo.png",
+        "description": artwork.description || `Aquarelle ${category.toLowerCase()} par Catherine Gonnord`,
+        "dateCreated": artworkYear,
+        "artMedium": artwork.technique || "Aquarelle",
+        "artworkSurface": artwork.support || "Papier",
+        "width": {
+            "@type": "Distance",
+            "name": artwork.dimensions || "Sur demande"
+        },
+        "creator": {
+            "@type": "Person",
+            "name": "Catherine Gonnord",
+            "jobTitle": "Artiste Aquarelliste"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": artwork.price || "0",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "url": currentUrl
+        },
+        "genre": category,
+        "inLanguage": "fr"
+    };
+    
+    // Add or update structured data script
+    let structuredDataScript = document.getElementById('artwork-structured-data');
+    if (!structuredDataScript) {
+        structuredDataScript = document.createElement('script');
+        structuredDataScript.id = 'artwork-structured-data';
+        structuredDataScript.type = 'application/ld+json';
+        document.head.appendChild(structuredDataScript);
+    }
+    structuredDataScript.textContent = JSON.stringify(structuredData);
 
     // Breadcrumb
-    document.getElementById('breadcrumbTitle').textContent = artwork.title;
+    document.getElementById('breadcrumbTitle').textContent = artworkTitle;
 
     // Category
-    const category = getCategoryLabel(artwork.theme || artwork.category || 'aquarelle');
     document.getElementById('artworkCategory').textContent = category.toUpperCase();
 
     // Title
-    document.getElementById('artworkTitle').textContent = artwork.title || 'Sans titre';
+    document.getElementById('artworkTitle').textContent = artworkTitle;
 
     // Year
-    document.getElementById('artworkYear').textContent = artwork.year || '';
+    document.getElementById('artworkYear').textContent = artworkYear;
 
     // Price
     const priceElement = document.getElementById('artworkPrice');
-    if (artwork.price) {
-        priceElement.textContent = `${artwork.price} €`;
-    } else {
-        priceElement.textContent = 'Prix sur demande';
-    }
+    priceElement.textContent = price;
 
     // Technique
     document.getElementById('artworkTechnique').textContent = artwork.technique || 'Non spécifiée';
@@ -113,7 +169,7 @@ function displayArtwork(artwork) {
     if (artwork.image_url) {
         const img = document.createElement('img');
         img.src = artwork.image_url;
-        img.alt = artwork.title || 'Œuvre d\'art';
+        img.alt = `${artworkTitle} - Aquarelle ${category} par Catherine Gonnord`;
         img.onerror = function() {
             // If image fails to load, show placeholder
             imageContainer.innerHTML = `
