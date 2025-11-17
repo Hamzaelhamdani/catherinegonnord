@@ -94,11 +94,29 @@
 
                 <!-- Artwork Grid -->
                 <div class="artwork-grid">
-                    <!-- Image Section -->
+                    <!-- Media Gallery Section -->
                     <div class="artwork-image-section">
+                        <!-- Main Media Container -->
                         <div class="artwork-image-container" id="artworkImageContainer">
-                            <!-- Image will be inserted here -->
+                            <!-- Main media will be inserted here -->
                         </div>
+                        
+                        <!-- Media Thumbnails Navigation -->
+                        <div class="media-thumbnails" id="mediaThumbnails">
+                            <!-- Thumbnails will be inserted here -->
+                        </div>
+                        
+                        <!-- Navigation Arrows (shown when multiple media) -->
+                        <button class="media-nav media-nav-prev hidden" id="mediaPrev" aria-label="Média précédent">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="media-nav media-nav-next hidden" id="mediaNext" aria-label="Média suivant">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
                     </div>
 
                     <!-- Details Section -->

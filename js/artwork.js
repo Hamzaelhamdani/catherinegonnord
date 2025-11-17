@@ -201,8 +201,166 @@ function displayArtwork(artwork) {
         document.getElementById('artworkDescriptionSection').style.display = 'none';
     }
 
+    // Setup media gallery
+    setupMediaGallery(artwork);
+
     // Setup buy button
     setupBuyButton(artwork);
+}
+
+// Setup media gallery with multiple photos/videos
+function setupMediaGallery(artwork) {
+    const imageContainer = document.getElementById('artworkImageContainer');
+    const thumbnailsContainer = document.getElementById('mediaThumbnails');
+    const prevBtn = document.getElementById('mediaPrev');
+    const nextBtn = document.getElementById('mediaNext');
+    
+    // Collecter tous les médias disponibles
+    const mediaItems = [];
+    
+    // Image principale
+    if (artwork.image_url) {
+        mediaItems.push({
+            type: 'image',
+            url: artwork.image_url,
+            alt: `${artwork.title} - Image principale`
+        });
+    }
+    
+    // Média 2
+    if (artwork.media_2 && artwork.media_2_type) {
+        mediaItems.push({
+            type: artwork.media_2_type,
+            url: artwork.media_2,
+            alt: `${artwork.title} - Média 2`
+        });
+    }
+    
+    // Média 3
+    if (artwork.media_3 && artwork.media_3_type) {
+        mediaItems.push({
+            type: artwork.media_3_type,
+            url: artwork.media_3,
+            alt: `${artwork.title} - Média 3`
+        });
+    }
+    
+    let currentMediaIndex = 0;
+    
+    // Fonction pour afficher un média
+    function displayMedia(index) {
+        if (mediaItems.length === 0) {
+            imageContainer.innerHTML = `
+                <div class="artwork-image-placeholder">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <p>Image non disponible</p>
+                </div>
+            `;
+            return;
+        }
+        
+        currentMediaIndex = index;
+        const media = mediaItems[index];
+        
+        if (media.type === 'image') {
+            const img = document.createElement('img');
+            img.src = media.url;
+            img.alt = media.alt;
+            img.onerror = function() {
+                imageContainer.innerHTML = `
+                    <div class="artwork-image-placeholder">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <p>Image non disponible</p>
+                    </div>
+                `;
+            };
+            imageContainer.innerHTML = '';
+            imageContainer.appendChild(img);
+        } else if (media.type === 'video') {
+            const embedUrl = convertToEmbedUrl(media.url);
+            const iframe = document.createElement('iframe');
+            iframe.src = embedUrl;
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            imageContainer.innerHTML = '';
+            imageContainer.appendChild(iframe);
+        }
+        
+        // Mettre à jour les thumbnails actifs
+        document.querySelectorAll('.media-thumbnail').forEach((thumb, i) => {
+            thumb.classList.toggle('active', i === index);
+        });
+    }
+    
+    // Convertir URL YouTube/Vimeo en embed URL
+    function convertToEmbedUrl(url) {
+        // YouTube
+        if (url.includes('youtube.com') || url.includes('youtu.be')) {
+            const videoId = url.includes('youtu.be') 
+                ? url.split('youtu.be/')[1].split('?')[0]
+                : new URLSearchParams(new URL(url).search).get('v');
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+        // Vimeo
+        if (url.includes('vimeo.com')) {
+            const videoId = url.split('vimeo.com/')[1].split('?')[0];
+            return `https://player.vimeo.com/video/${videoId}`;
+        }
+        return url;
+    }
+    
+    // Créer les thumbnails
+    if (mediaItems.length > 1) {
+        thumbnailsContainer.innerHTML = '';
+        mediaItems.forEach((media, index) => {
+            const thumb = document.createElement('div');
+            thumb.className = 'media-thumbnail';
+            if (index === 0) thumb.classList.add('active');
+            
+            if (media.type === 'image') {
+                const img = document.createElement('img');
+                img.src = media.url;
+                img.alt = media.alt;
+                thumb.appendChild(img);
+            } else if (media.type === 'video') {
+                thumb.classList.add('video-thumbnail');
+                // Essayer d'obtenir la thumbnail de la vidéo
+                const videoThumb = document.createElement('div');
+                videoThumb.style.cssText = 'width:100%;height:100%;background:#333;display:flex;align-items:center;justify-content:center;color:white;';
+                videoThumb.innerHTML = '▶';
+                thumb.appendChild(videoThumb);
+            }
+            
+            thumb.addEventListener('click', () => displayMedia(index));
+            thumbnailsContainer.appendChild(thumb);
+        });
+        
+        // Montrer les flèches de navigation
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+        
+        prevBtn.addEventListener('click', () => {
+            const newIndex = (currentMediaIndex - 1 + mediaItems.length) % mediaItems.length;
+            displayMedia(newIndex);
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            const newIndex = (currentMediaIndex + 1) % mediaItems.length;
+            displayMedia(newIndex);
+        });
+    } else {
+        // Masquer les thumbnails et flèches si un seul média
+        thumbnailsContainer.style.display = 'none';
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+    }
+    
+    // Afficher le premier média
+    displayMedia(0);
 }
 
 // Get category label

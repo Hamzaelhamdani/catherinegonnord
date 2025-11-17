@@ -286,11 +286,48 @@
                     <textarea id="artworkDescription" rows="4" placeholder="Description détaillée de l'œuvre..."></textarea>
                 </div>
 
+                <!-- Médias Section -->
                 <div class="form-group">
-                    <label for="artworkImage">Image de l'œuvre</label>
+                    <label for="artworkImage">Image principale de l'œuvre *</label>
                     <input type="file" id="artworkImage" accept="image/*">
                     <div id="imagePreview" class="image-preview hidden">
                         <img id="previewImg" src="" alt="Aperçu">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="artworkMedia2Type">Média supplémentaire 2 (optionnel)</label>
+                    <select id="artworkMedia2Type" class="media-type-selector">
+                        <option value="">Aucun média</option>
+                        <option value="image">Photo</option>
+                        <option value="video">Vidéo</option>
+                    </select>
+                    <div id="media2Input" class="media-input-container hidden">
+                        <input type="file" id="artworkMedia2File" accept="image/*,video/*">
+                        <div id="media2Preview" class="image-preview hidden">
+                            <img id="previewMedia2" src="" alt="Aperçu média 2">
+                        </div>
+                        <div id="media2VideoPreview" class="video-preview hidden">
+                            <p>🎥 Vidéo sélectionnée: <span id="media2VideoName"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="artworkMedia3Type">Média supplémentaire 3 (optionnel)</label>
+                    <select id="artworkMedia3Type" class="media-type-selector">
+                        <option value="">Aucun média</option>
+                        <option value="image">Photo</option>
+                        <option value="video">Vidéo</option>
+                    </select>
+                    <div id="media3Input" class="media-input-container hidden">
+                        <input type="file" id="artworkMedia3File" accept="image/*,video/*">
+                        <div id="media3Preview" class="image-preview hidden">
+                            <img id="previewMedia3" src="" alt="Aperçu média 3">
+                        </div>
+                        <div id="media3VideoPreview" class="video-preview hidden">
+                            <p>🎥 Vidéo sélectionnée: <span id="media3VideoName"></span></p>
+                        </div>
                     </div>
                 </div>
 

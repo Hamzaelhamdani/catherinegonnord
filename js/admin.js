@@ -37,6 +37,13 @@ const artworksTableBody = document.getElementById('artworksTableBody');
 const artworkImage = document.getElementById('artworkImage');
 const imagePreview = document.getElementById('imagePreview');
 const previewImg = document.getElementById('previewImg');
+
+// Médias supplémentaires (seront initialisés après connexion)
+let artworkMedia2Type, artworkMedia3Type, media2Input, media3Input;
+let artworkMedia2File, artworkMedia3File;
+let media2Preview, media3Preview, previewMedia2, previewMedia3;
+let media2VideoPreview, media3VideoPreview, media2VideoName, media3VideoName;
+
 const confirmDialog = document.getElementById('confirmDialog');
 const confirmTitle = document.getElementById('confirmTitle');
 const confirmMessage = document.getElementById('confirmMessage');
@@ -69,6 +76,32 @@ confirmDialog.addEventListener('click', (e) => {
         closeConfirmDialog();
     }
 });
+
+// Fonction pour initialiser les event listeners des médias
+function initMediaEventListeners() {
+    artworkMedia2Type = document.getElementById('artworkMedia2Type');
+    artworkMedia3Type = document.getElementById('artworkMedia3Type');
+    media2Input = document.getElementById('media2Input');
+    media3Input = document.getElementById('media3Input');
+    artworkMedia2File = document.getElementById('artworkMedia2File');
+    artworkMedia3File = document.getElementById('artworkMedia3File');
+    media2Preview = document.getElementById('media2Preview');
+    media3Preview = document.getElementById('media3Preview');
+    previewMedia2 = document.getElementById('previewMedia2');
+    previewMedia3 = document.getElementById('previewMedia3');
+    media2VideoPreview = document.getElementById('media2VideoPreview');
+    media3VideoPreview = document.getElementById('media3VideoPreview');
+    media2VideoName = document.getElementById('media2VideoName');
+    media3VideoName = document.getElementById('media3VideoName');
+    
+    // Event listeners pour les médias supplémentaires
+    if (artworkMedia2Type) {
+        artworkMedia2Type.addEventListener('change', () => handleMediaTypeChange(2));
+        artworkMedia3Type.addEventListener('change', () => handleMediaTypeChange(3));
+        artworkMedia2File.addEventListener('change', () => handleMediaFilePreview(2));
+        artworkMedia3File.addEventListener('change', () => handleMediaFilePreview(3));
+    }
+}
 
 // Authentication Functions
 async function checkUser() {
@@ -145,6 +178,9 @@ async function handleLogout() {
 function showDashboard() {
     loginSection.classList.add('hidden');
     adminDashboard.classList.remove('hidden');
+    
+    // Initialiser les event listeners des médias après affichage du dashboard
+    initMediaEventListeners();
 }
 
 function showLogin() {
@@ -209,13 +245,26 @@ function displayArtworks(artworks) {
         return;
     }
     
-    artworksTableBody.innerHTML = artworks.map(artwork => `
+    artworksTableBody.innerHTML = artworks.map(artwork => {
+        // Compter les médias disponibles
+        let mediaCount = artwork.image_url ? 1 : 0;
+        if (artwork.media_2) mediaCount++;
+        if (artwork.media_3) mediaCount++;
+        
+        const mediaIndicator = mediaCount > 1 
+            ? `<span class="media-count-badge" title="${mediaCount} médias">${mediaCount} 📷</span>` 
+            : '';
+        
+        return `
         <tr>
             <td>
-                ${artwork.image_url ? 
-                    `<img src="${artwork.image_url}" alt="${artwork.title}" class="artwork-thumbnail">` :
-                    `<div class="artwork-thumbnail" style="background: var(--gray-200); display: flex; align-items: center; justify-content: center; color: var(--gray-500);">🎨</div>`
-                }
+                <div class="artwork-thumbnail-container">
+                    ${artwork.image_url ? 
+                        `<img src="${artwork.image_url}" alt="${artwork.title}" class="artwork-thumbnail">` :
+                        `<div class="artwork-thumbnail" style="background: var(--gray-200); display: flex; align-items: center; justify-content: center; color: var(--gray-500);">🎨</div>`
+                    }
+                    ${mediaIndicator}
+                </div>
             </td>
             <td><strong>${artwork.title}</strong></td>
             <td><span class="category-badge category-${artwork.theme || artwork.category}">${getCategoryLabel(artwork.theme || artwork.category)}</span></td>
@@ -237,7 +286,8 @@ function displayArtworks(artworks) {
                 </div>
             </td>
         </tr>
-    `).join('');
+        `;
+    }).join('');
 }
 
 function getCategoryLabel(category) {
@@ -306,6 +356,35 @@ async function loadArtworkData(artworkId) {
             previewImg.src = data.image_url;
             imagePreview.classList.remove('hidden');
         }
+        
+        // Charger les médias supplémentaires
+        if (data.media_2_type) {
+            artworkMedia2Type.value = data.media_2_type;
+            handleMediaTypeChange(2);
+            if (data.media_2_type === 'image' && data.media_2) {
+                previewMedia2.src = data.media_2;
+                media2Preview.classList.remove('hidden');
+            } else if (data.media_2_type === 'video' && data.media_2) {
+                // Extraire le nom du fichier de l'URL
+                const fileName = data.media_2.split('/').pop();
+                media2VideoName.textContent = fileName;
+                media2VideoPreview.classList.remove('hidden');
+            }
+        }
+        
+        if (data.media_3_type) {
+            artworkMedia3Type.value = data.media_3_type;
+            handleMediaTypeChange(3);
+            if (data.media_3_type === 'image' && data.media_3) {
+                previewMedia3.src = data.media_3;
+                media3Preview.classList.remove('hidden');
+            } else if (data.media_3_type === 'video' && data.media_3) {
+                // Extraire le nom du fichier de l'URL
+                const fileName = data.media_3.split('/').pop();
+                media3VideoName.textContent = fileName;
+                media3VideoPreview.classList.remove('hidden');
+            }
+        }
     } catch (error) {
         console.error('Error loading artwork:', error);
     }
@@ -316,6 +395,12 @@ function closeArtworkModal() {
     artworkForm.reset();
     editingArtworkId = null;
     imagePreview.classList.add('hidden');
+    media2Preview.classList.add('hidden');
+    media3Preview.classList.add('hidden');
+    media2VideoPreview.classList.add('hidden');
+    media3VideoPreview.classList.add('hidden');
+    media2Input.classList.add('hidden');
+    media3Input.classList.add('hidden');
 }
 
 // Form Submission
@@ -412,6 +497,42 @@ async function handleArtworkSubmit(e) {
             }
         }
         
+        // Handle media 2 upload
+        const media2Type = artworkMedia2Type.value;
+        if (media2Type) {
+            const media2File = artworkMedia2File.files[0];
+            if (media2File) {
+                submitBtnText.textContent = 'Upload média 2...';
+                try {
+                    const media2Url = await uploadMedia(media2File, media2Type, 'media2');
+                    artworkData.media_2 = media2Url;
+                    artworkData.media_2_type = media2Type;
+                    console.log('✅ Média 2 uploadé:', media2Url);
+                } catch (uploadError) {
+                    console.error('❌ Erreur upload média 2:', uploadError);
+                    alert('⚠️ Erreur lors de l\'upload du média 2: ' + uploadError.message);
+                }
+            }
+        }
+        
+        // Handle media 3 upload
+        const media3Type = artworkMedia3Type.value;
+        if (media3Type) {
+            const media3File = artworkMedia3File.files[0];
+            if (media3File) {
+                submitBtnText.textContent = 'Upload média 3...';
+                try {
+                    const media3Url = await uploadMedia(media3File, media3Type, 'media3');
+                    artworkData.media_3 = media3Url;
+                    artworkData.media_3_type = media3Type;
+                    console.log('✅ Média 3 uploadé:', media3Url);
+                } catch (uploadError) {
+                    console.error('❌ Erreur upload média 3:', uploadError);
+                    alert('⚠️ Erreur lors de l\'upload du média 3: ' + uploadError.message);
+                }
+            }
+        }
+        
         if (editingArtworkId) {
             // Update existing artwork - Essayer d'abord avec toutes les nouvelles colonnes
             const { error } = await supabase
@@ -494,26 +615,35 @@ async function handleArtworkSubmit(e) {
     }
 }
 
-// Image Upload
-async function uploadImage(file) {
+// Media Upload - Fonction unifiée pour images et vidéos
+async function uploadMedia(file, mediaType, prefix = 'artwork') {
     try {
-        // Vérifier la taille du fichier (max 5MB)
-        const maxSize = 5 * 1024 * 1024; // 5MB
+        // Vérifier la taille du fichier
+        const maxSize = mediaType === 'video' ? 50 * 1024 * 1024 : 5 * 1024 * 1024; // 50MB pour vidéo, 5MB pour image
         if (file.size > maxSize) {
-            throw new Error('Le fichier est trop grand (max 5MB). Taille: ' + (file.size / 1024 / 1024).toFixed(2) + 'MB');
+            const maxSizeMB = (maxSize / 1024 / 1024).toFixed(0);
+            const fileSizeMB = (file.size / 1024 / 1024).toFixed(2);
+            throw new Error(`Le fichier est trop grand (max ${maxSizeMB}MB). Taille: ${fileSizeMB}MB`);
         }
         
         // Vérifier le type de fichier
-        const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-        if (!allowedTypes.includes(file.type)) {
-            throw new Error('Type de fichier non autorisé. Utilisez JPG, PNG ou WebP.');
+        if (mediaType === 'image') {
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                throw new Error('Type d\'image non autorisé. Utilisez JPG, PNG ou WebP.');
+            }
+        } else if (mediaType === 'video') {
+            const allowedTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'];
+            if (!allowedTypes.includes(file.type)) {
+                throw new Error('Type de vidéo non autorisé. Utilisez MP4, WebM, OGG ou MOV.');
+            }
         }
         
         const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+        const fileName = `${prefix}_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
         const filePath = `artworks/${fileName}`;
         
-        console.log('📤 Upload de l\'image:', filePath);
+        console.log(`📤 Upload du ${mediaType}:`, filePath);
         
         const { error: uploadError, data: uploadData } = await supabase.storage
             .from('artwork-images')
@@ -542,9 +672,14 @@ async function uploadImage(file) {
         
         return data.publicUrl;
     } catch (error) {
-        console.error('❌ Error uploading image:', error);
+        console.error(`❌ Erreur upload ${mediaType}:`, error);
         throw error;
     }
+}
+
+// Image Upload - Garde la fonction originale pour compatibilité
+async function uploadImage(file, prefix = 'artwork') {
+    return uploadMedia(file, 'image', prefix);
 }
 
 function handleImagePreview(e) {
@@ -556,6 +691,67 @@ function handleImagePreview(e) {
             imagePreview.classList.remove('hidden');
         };
         reader.readAsDataURL(file);
+    }
+}
+
+// Gestion du changement de type de média (image ou vidéo)
+function handleMediaTypeChange(mediaNumber) {
+    const typeSelector = mediaNumber === 2 ? artworkMedia2Type : artworkMedia3Type;
+    const inputContainer = mediaNumber === 2 ? media2Input : media3Input;
+    const fileInput = mediaNumber === 2 ? artworkMedia2File : artworkMedia3File;
+    const imagePreviewEl = mediaNumber === 2 ? media2Preview : media3Preview;
+    const videoPreviewEl = mediaNumber === 2 ? media2VideoPreview : media3VideoPreview;
+    
+    const selectedType = typeSelector.value;
+    
+    if (!selectedType) {
+        inputContainer.classList.add('hidden');
+        fileInput.classList.add('hidden');
+        imagePreviewEl.classList.add('hidden');
+        videoPreviewEl.classList.add('hidden');
+        fileInput.value = '';
+        return;
+    }
+    
+    inputContainer.classList.remove('hidden');
+    fileInput.classList.remove('hidden');
+    imagePreviewEl.classList.add('hidden');
+    videoPreviewEl.classList.add('hidden');
+    
+    // Mettre à jour l'attribut accept selon le type
+    if (selectedType === 'image') {
+        fileInput.setAttribute('accept', 'image/*');
+    } else if (selectedType === 'video') {
+        fileInput.setAttribute('accept', 'video/*');
+    }
+}
+
+// Prévisualisation des fichiers médias (images et vidéos)
+function handleMediaFilePreview(mediaNumber) {
+    const fileInput = mediaNumber === 2 ? artworkMedia2File : artworkMedia3File;
+    const typeSelector = mediaNumber === 2 ? artworkMedia2Type : artworkMedia3Type;
+    const previewImg = mediaNumber === 2 ? previewMedia2 : previewMedia3;
+    const imagePreviewContainer = mediaNumber === 2 ? media2Preview : media3Preview;
+    const videoPreviewContainer = mediaNumber === 2 ? media2VideoPreview : media3VideoPreview;
+    const videoNameDisplay = mediaNumber === 2 ? media2VideoName : media3VideoName;
+    
+    const file = fileInput.files[0];
+    if (!file) return;
+    
+    const selectedType = typeSelector.value;
+    
+    if (selectedType === 'image' && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            imagePreviewContainer.classList.remove('hidden');
+            videoPreviewContainer.classList.add('hidden');
+        };
+        reader.readAsDataURL(file);
+    } else if (selectedType === 'video' && file.type.startsWith('video/')) {
+        videoNameDisplay.textContent = file.name;
+        videoPreviewContainer.classList.remove('hidden');
+        imagePreviewContainer.classList.add('hidden');
     }
 }
 
