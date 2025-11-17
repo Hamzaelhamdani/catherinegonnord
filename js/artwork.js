@@ -213,8 +213,9 @@ function getCategoryLabel(value) {
         'eaux': 'Eaux',
         'escaliers': 'Escaliers',
         'interieurs': 'Intérieurs',
-        'saisons': 'Saisons',
         'paysages': 'Paysages',
+        'portraits': 'Portraits',
+        'saisons': 'Saisons',
         'villes': 'Villes',
         'voyages': 'Voyages',
         'aquarelle': 'Aquarelle'
