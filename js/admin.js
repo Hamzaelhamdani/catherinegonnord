@@ -218,7 +218,7 @@ function displayArtworks(artworks) {
                 }
             </td>
             <td><strong>${artwork.title}</strong></td>
-            <td><span class="category-badge category-${artwork.category}">${getCategoryLabel(artwork.category)}</span></td>
+            <td><span class="category-badge category-${artwork.theme || artwork.category}">${getCategoryLabel(artwork.theme || artwork.category)}</span></td>
             <td>${artwork.dimensions}</td>
             <td><span class="artwork-price">${artwork.price} €</span></td>
             <td><span class="artwork-year">${artwork.year}</span></td>
@@ -242,11 +242,18 @@ function displayArtworks(artworks) {
 
 function getCategoryLabel(category) {
     const labels = {
+        'abstractions': 'Abstractions',
+        'architecture': 'Architecture',
         'eaux': 'Eaux',
         'escaliers': 'Escaliers',
+        'interieurs': 'Intérieurs',
+        'paysages': 'Paysages',
+        'portraits': 'Portraits',
+        'saisons': 'Saisons',
+        'villes': 'Villes',
         'voyages': 'Voyages'
     };
-    return labels[category] || category;
+    return labels[category] || category || 'Non catégorisé';
 }
 
 // Modal Functions
